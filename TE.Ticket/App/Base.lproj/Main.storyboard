@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gu7-vy-grl">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15508"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Te.Ticket-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="WebView" customModule="TE_Ticket" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView multipleTouchEnabled="YES" contentMode="scaleToFill" allowsLinkPreview="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M0w-gp-Kei">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <wkWebViewConfiguration key="configuration" allowsPictureInPictureMediaPlayback="NO">
+                                    <dataDetectorTypes key="dataDetectorTypes" none="YES"/>
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences" javaScriptEnabled="NO"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="M0w-gp-Kei" secondAttribute="bottom" id="4no-s4-MXE"/>
+                            <constraint firstItem="M0w-gp-Kei" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="A1I-ga-R9X"/>
+                            <constraint firstItem="M0w-gp-Kei" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="AUm-6t-sd2"/>
+                            <constraint firstItem="M0w-gp-Kei" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="azw-Ci-KYK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Te.Ticket" largeTitleDisplayMode="never" id="EQW-5M-Wv1">
+                        <barButtonItem key="leftBarButtonItem" title=" " id="chE-9y-tbZ">
+                            <connections>
+                                <action selector="refresh" destination="BYZ-38-t0r" id="t1M-4D-kyx"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title=" " id="lac-p8-jMb">
+                            <connections>
+                                <segue destination="DLd-VW-iaM" kind="presentation" identifier="showSettings" id="1lU-fu-AwP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="refreshBtn" destination="chE-9y-tbZ" id="DcB-eC-hZv"/>
+                        <outlet property="settingsBtn" destination="lac-p8-jMb" id="iyI-cu-NpK"/>
+                        <outlet property="webView" destination="M0w-gp-Kei" id="hrx-7T-ixF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="527.536231884058" y="124.55357142857142"/>
+        </scene>
+        <!--Menü-->
+        <scene sceneID="wJa-5W-KZU">
+            <objects>
+                <viewController id="UhF-Ew-uBw" customClass="SettingsView" customModule="TE_Ticket" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Aq-3M-cpw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="F1e-An-YzU">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="actionCell" textLabel="KIh-k3-AEP" style="IBUITableViewCellStyleDefault" id="mXC-fM-dhM" customClass="ActionCell" customModule="TE_Ticket" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mXC-fM-dhM" id="06T-Ra-vfJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KIh-k3-AEP">
+                                                    <rect key="frame" x="20" y="0.0" width="315" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="switchCell" textLabel="bkn-z0-VKY" style="IBUITableViewCellStyleDefault" id="ZLW-xa-zkP" customClass="SwitchCell" customModule="TE_Ticket" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="99" width="374" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZLW-xa-zkP" id="LNr-Wh-5J5">
+                                            <rect key="frame" x="0.0" y="0.0" width="330" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bkn-z0-VKY">
+                                                    <rect key="frame" x="20" y="0.0" width="302" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QWm-FR-1J7">
+                                <rect key="frame" x="0.0" y="764" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="p8g-zE-zR8"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem systemItem="flexibleSpace" id="hcr-TO-fSp"/>
+                                    <barButtonItem id="TJH-lK-BF7"/>
+                                    <barButtonItem enabled="NO" title="made by TotalEgal.xyz - v1.1.0" id="zs8-pk-x4W"/>
+                                    <barButtonItem systemItem="flexibleSpace" id="Ycf-7c-N6h"/>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QWm-FR-1J7" firstAttribute="leading" secondItem="xk3-qg-SQx" secondAttribute="leading" id="7Ea-c2-eJk"/>
+                            <constraint firstAttribute="bottom" secondItem="F1e-An-YzU" secondAttribute="bottom" id="D1k-yp-N6x"/>
+                            <constraint firstItem="F1e-An-YzU" firstAttribute="leading" secondItem="xk3-qg-SQx" secondAttribute="leading" id="KEW-9x-TeJ"/>
+                            <constraint firstItem="QWm-FR-1J7" firstAttribute="trailing" secondItem="xk3-qg-SQx" secondAttribute="trailing" id="OMd-ho-8c2"/>
+                            <constraint firstItem="QWm-FR-1J7" firstAttribute="bottom" secondItem="xk3-qg-SQx" secondAttribute="bottom" id="bv1-oR-kjv"/>
+                            <constraint firstItem="F1e-An-YzU" firstAttribute="trailing" secondItem="xk3-qg-SQx" secondAttribute="trailing" id="drl-xz-ZYU"/>
+                            <constraint firstItem="F1e-An-YzU" firstAttribute="top" secondItem="5Aq-3M-cpw" secondAttribute="top" id="oqB-VD-0vh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="xk3-qg-SQx"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Menü" id="PfR-Yi-Znk">
+                        <barButtonItem key="leftBarButtonItem" title=" " id="jeY-gU-uP5">
+                            <connections>
+                                <action selector="closeButtonWithSender:" destination="UhF-Ew-uBw" id="Tvm-xU-j2u"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title=" " id="hpH-ml-fsl">
+                            <connections>
+                                <action selector="heartButtonWithSender:" destination="UhF-Ew-uBw" id="4m2-Qk-N2n"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="closeBtn" destination="jeY-gU-uP5" id="qSS-gT-IkC"/>
+                        <outlet property="heartBtn" destination="hpH-ml-fsl" id="4yj-AR-eT9"/>
+                        <outlet property="tableView" destination="F1e-An-YzU" id="ZGa-fj-gNz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rSP-6G-Nup" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2153.6231884057975" y="124.55357142857142"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="L31-GF-HWO">
+            <objects>
+                <navigationController id="DLd-VW-iaM" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8rb-td-Y9H">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="UhF-Ew-uBw" kind="relationship" relationship="rootViewController" id="cOH-zn-7v0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TJC-Gt-KZw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1345" y="125"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Wfh-1F-cMD">
+            <objects>
+                <navigationController id="Gu7-vy-grl" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GDZ-5u-8Tx">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Sgk-S5-tbB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cLT-gm-otF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-301" y="125"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+</document>
