@@ -69,7 +69,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="actionCell" textLabel="KIh-k3-AEP" style="IBUITableViewCellStyleDefault" id="mXC-fM-dhM" customClass="ActionCell" customModule="TE_Ticket" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="actionCell" textLabel="KIh-k3-AEP" style="IBUITableViewCellStyleDefault" id="mXC-fM-dhM">
                                         <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mXC-fM-dhM" id="06T-Ra-vfJ">
@@ -86,7 +86,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="switchCell" textLabel="bkn-z0-VKY" style="IBUITableViewCellStyleDefault" id="ZLW-xa-zkP" customClass="SwitchCell" customModule="TE_Ticket" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="switchCell" textLabel="bkn-z0-VKY" style="IBUITableViewCellStyleDefault" id="ZLW-xa-zkP">
                                         <rect key="frame" x="20" y="99" width="374" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ZLW-xa-zkP" id="LNr-Wh-5J5">
@@ -114,7 +114,7 @@
                                 <items>
                                     <barButtonItem systemItem="flexibleSpace" id="hcr-TO-fSp"/>
                                     <barButtonItem id="TJH-lK-BF7"/>
-                                    <barButtonItem enabled="NO" title="made by TotalEgal.xyz - v1.1.0" id="zs8-pk-x4W"/>
+                                    <barButtonItem enabled="NO" title="made by TotalEgal.xyz - v1.2.0" id="zs8-pk-x4W"/>
                                     <barButtonItem systemItem="flexibleSpace" id="Ycf-7c-N6h"/>
                                 </items>
                             </toolbar>
