@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		1215C3A6234CF8A900F04FAE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1215C3A5234CF8A900F04FAE /* WebKit.framework */; };
 		1215C3A8234CF8AE00F04FAE /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1215C3A7234CF8AE00F04FAE /* LocalAuthentication.framework */; };
+		12388A0E23566EAF00D71C7F /* demo.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 12388A0D23566EAF00D71C7F /* demo.pdf */; };
 		1259E341234CC28800C2E829 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1259E340234CC28800C2E829 /* AppDelegate.swift */; };
 		1259E348234CC28800C2E829 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1259E346234CC28800C2E829 /* Main.storyboard */; };
 		1259E34A234CC28D00C2E829 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1259E349234CC28D00C2E829 /* Assets.xcassets */; };
 		1259E34D234CC28D00C2E829 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1259E34B234CC28D00C2E829 /* LaunchScreen.storyboard */; };
-		12C75027234CCB3400771882 /* demo.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 12C75026234CCB3400771882 /* demo.pdf */; };
 		12C7502B234CCE9400771882 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7502A234CCE9400771882 /* WebView.swift */; };
 		12C7502D234CD08A00771882 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7502C234CD08A00771882 /* SettingsView.swift */; };
 		12C7502F234CEA6000771882 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7502E234CEA6000771882 /* Utils.swift */; };
@@ -35,13 +35,13 @@
 /* Begin PBXFileReference section */
 		1215C3A5234CF8A900F04FAE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		1215C3A7234CF8AE00F04FAE /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
+		12388A0D23566EAF00D71C7F /* demo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = demo.pdf; sourceTree = "<group>"; };
 		1259E33D234CC28800C2E829 /* TE.Ticket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TE.Ticket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1259E340234CC28800C2E829 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1259E347234CC28800C2E829 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1259E349234CC28D00C2E829 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1259E34C234CC28D00C2E829 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1259E34E234CC28D00C2E829 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		12C75026234CCB3400771882 /* demo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = demo.pdf; sourceTree = "<group>"; };
 		12C7502A234CCE9400771882 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		12C7502C234CD08A00771882 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		12C7502E234CEA6000771882 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 				12C75028234CCE7600771882 /* Views */,
 				12C75029234CCE7E00771882 /* App */,
 				1259E34E234CC28D00C2E829 /* Info.plist */,
-				12C75026234CCB3400771882 /* demo.pdf */,
+				12388A0D23566EAF00D71C7F /* demo.pdf */,
 			);
 			path = TE.Ticket;
 			sourceTree = "<group>";
@@ -178,9 +178,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1259E34D234CC28D00C2E829 /* LaunchScreen.storyboard in Resources */,
-				12C75027234CCB3400771882 /* demo.pdf in Resources */,
 				1259E34A234CC28D00C2E829 /* Assets.xcassets in Resources */,
 				1259E348234CC28800C2E829 /* Main.storyboard in Resources */,
+				12388A0E23566EAF00D71C7F /* demo.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,7 +339,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 62;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = AXLC3PQNC8;
 				INFOPLIST_FILE = TE.Ticket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -347,7 +347,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.TE-Ticket";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -360,7 +360,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 62;
+				CURRENT_PROJECT_VERSION = 68;
 				DEVELOPMENT_TEAM = AXLC3PQNC8;
 				INFOPLIST_FILE = TE.Ticket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -368,7 +368,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.TE-Ticket";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -57,7 +57,7 @@
             </objects>
             <point key="canvasLocation" x="527.536231884058" y="124.55357142857142"/>
         </scene>
-        <!--Menü-->
+        <!--App Menü-->
         <scene sceneID="wJa-5W-KZU">
             <objects>
                 <viewController id="UhF-Ew-uBw" customClass="SettingsView" customModule="TE_Ticket" customModuleProvider="target" sceneMemberID="viewController">
@@ -114,7 +114,7 @@
                                 <items>
                                     <barButtonItem systemItem="flexibleSpace" id="hcr-TO-fSp"/>
                                     <barButtonItem id="TJH-lK-BF7"/>
-                                    <barButtonItem enabled="NO" title="made by TotalEgal.xyz - v1.2.0" id="zs8-pk-x4W"/>
+                                    <barButtonItem enabled="NO" title="made by undeaD_D - v1.4.0" id="zs8-pk-x4W"/>
                                     <barButtonItem systemItem="flexibleSpace" id="Ycf-7c-N6h"/>
                                 </items>
                             </toolbar>
@@ -131,13 +131,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xk3-qg-SQx"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Menü" id="PfR-Yi-Znk">
+                    <navigationItem key="navigationItem" title="App Menü" id="PfR-Yi-Znk">
                         <barButtonItem key="leftBarButtonItem" title=" " id="jeY-gU-uP5">
                             <connections>
                                 <action selector="closeButtonWithSender:" destination="UhF-Ew-uBw" id="Tvm-xU-j2u"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title=" " id="hpH-ml-fsl">
+                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="heartButtonWithSender:" destination="UhF-Ew-uBw" id="4m2-Qk-N2n"/>
                             </connections>
@@ -186,5 +187,5 @@
             <point key="canvasLocation" x="-301" y="125"/>
         </scene>
     </scenes>
-    <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

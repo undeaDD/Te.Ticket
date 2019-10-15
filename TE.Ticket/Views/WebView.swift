@@ -13,23 +13,21 @@ class WebView: UIViewController, UIAdaptivePresentationControllerDelegate {
         
         refreshBtn.image = UIImage("arrow.2.circlepath.circle.fill")
         settingsBtn.image = UIImage("rectangle.stack.fill")
-        "[TE] webview initialized".log()
         
         if UserDefaults.standard.bool(forKey: "TeBioAuth") {
             LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "App start abgesichert") { (result, error) in
                 DispatchQueue.main.async {
                     if error != nil || !result {
-                        "[TE] app crash -> not authenticated".log()
                         fatalError("not authenticated")
-                    } else {       
-                        self.webView.load(URLRequest(url: Utils.loadPDF()))
-                        "[TE] webview loaded with biometric auth".log()
+                    } else {
+                        let url = Utils.loadPDF()
+                        self.webView.loadFileURL(url, allowingReadAccessTo: url)
                     }
                 }
             }
         } else {
-            webView.load(URLRequest(url: Utils.loadPDF()))
-            "[TE] webview loaded without biometric auth".log()
+            let url = Utils.loadPDF()
+            self.webView.loadFileURL(url, allowingReadAccessTo: url)
         }
     }
     
@@ -37,16 +35,14 @@ class WebView: UIViewController, UIAdaptivePresentationControllerDelegate {
         super.viewWillAppear(animated)
         if UserDefaults.standard.bool(forKey: "TeShouldUpdate") {
             UserDefaults.standard.set(false, forKey: "TeShouldUpdate")
-            webView.load(URLRequest(url: Utils.loadPDF()))
-            "[TE] webview refreshed automatically".log()
-        } else {
-            "[TE] webview no update needed".log()
+            let url = Utils.loadPDF()
+            self.webView.loadFileURL(url, allowingReadAccessTo: url)
         }
     }
     
     @IBAction func refresh() {
-        webView.load(URLRequest(url: Utils.loadPDF()))
-        "[TE] webview manually refreshed".log()
+        let url = Utils.loadPDF()
+        self.webView.loadFileURL(url, allowingReadAccessTo: url)
     }
-}
 
+}
