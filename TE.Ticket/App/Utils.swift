@@ -1,4 +1,5 @@
 import UIKit
+import LocalAuthentication
 
 class Utils {
 
@@ -51,6 +52,22 @@ class Utils {
                 let request = URLRequest(url: URL(string: url)!)
                 URLSession.shared.dataTask(with: request).resume()
             }
+        }
+    }
+    
+    public static func shouldLoad(_ callback: @escaping (Bool) -> Void) {
+        if UserDefaults.standard.bool(forKey: "TeBioAuth") {
+            LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "App start abgesichert") { (result, error) in
+                DispatchQueue.main.async {
+                    if error != nil || !result {
+                        callback(false)
+                    } else {
+                        callback(true)
+                    }
+                }
+            }
+        } else {
+            callback(true)
         }
     }
     

@@ -18,5 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
+
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if let nav = window?.rootViewController as? UINavigationController,
+           let webView = nav.topViewController as? WebView,
+           let presenting = webView.presentingViewController as? UINavigationController {
+            presenting.dismiss(animated: true)
+        }
+        return true
+    }
 }
 

@@ -1,4 +1,5 @@
 import UIKit
+import IntentsUI
 import MessageUI
 import LocalAuthentication
 import MobileCoreServices
@@ -38,9 +39,9 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var temp = 3
+        var temp = 4
         if #available(iOS 13.0, *) {
-            temp = 4
+            temp = 5
         }
         
         if MFMailComposeViewController.canSendMail() {
@@ -72,6 +73,14 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "Ticket löschen"
             return cell
         case (0, 2):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "actionCell") else {
+                fatalError("invalid cell dequeued")
+            }
+            
+            cell.imageView?.image = UIImage("mic.fill")
+            cell.textLabel?.text = "Siri Befehl erstellen"
+            return cell
+        case (0, 3):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "switchCell") else {
                 fatalError("invalid cell dequeued")
             }
@@ -80,7 +89,7 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
             cell.imageView?.image = UIImage("faceid")
             cell.textLabel?.text = "App Biometrisch sichern"
             return cell
-        case (0, 3):
+        case (0, 4):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "switchCell") else {
                 fatalError("invalid cell dequeued")
             }
@@ -144,6 +153,20 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
             alert.addAction(UIAlertAction(title: "Nein", style: .cancel, handler: nil))
             self.present(alert, animated: true)
         case (0, 2):
+            let activity = NSUserActivity(activityType: "xyz.TE-Ticket.openApp")
+            activity.title = "Ticket anzeigen"
+            activity.isEligibleForSearch = true
+            activity.isEligibleForPrediction = true
+            activity.isEligibleForPublicIndexing = false
+            activity.isEligibleForHandoff = false
+            activity.suggestedInvocationPhrase = "Ticket anzeigen"
+            activity.keywords = Set<String>(arrayLiteral: "Ticket", "Te.Ticket", "Fahrschein", "Semesterticket", "Semester", "Kontrolle")
+            activity.persistentIdentifier = NSUserActivityPersistentIdentifier(stringLiteral: "xyz.TE-Ticket.openApp")
+            let viewController = INUIAddVoiceShortcutViewController(shortcut: INShortcut(userActivity: activity))
+            //viewController.modalPresentationStyle = .formSheet
+            viewController.delegate = self
+            present(viewController, animated: true)
+        case (0, 3):
             let newValue = !UserDefaults.standard.bool(forKey: "TeBioAuth")
             let cell = tableView.cellForRow(at: indexPath)
             
@@ -159,7 +182,7 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
             
             cell?.accessoryType = newValue ? .checkmark : .none
             UserDefaults.standard.set(newValue, forKey: "TeBioAuth")
-        case (0, 3):
+        case (0, 4):
              let newValue = !UserDefaults.standard.bool(forKey: "TeDarkMode")
              let cell = tableView.cellForRow(at: indexPath)
              cell?.accessoryType = newValue ? .checkmark : .none
@@ -206,7 +229,7 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
 
 }
 
-extension SettingsView: MFMailComposeViewControllerDelegate, UIDocumentPickerDelegate {
+extension SettingsView: MFMailComposeViewControllerDelegate, UIDocumentPickerDelegate, INUIAddVoiceShortcutViewControllerDelegate {
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
@@ -226,6 +249,14 @@ extension SettingsView: MFMailComposeViewControllerDelegate, UIDocumentPickerDel
             alert.addAction(UIAlertAction(title: "Okay", style: .destructive, handler: nil))
             self.present(alert, animated: true)
         }
+    }
+    
+    func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
+        controller.dismiss(animated: true)
+    }
+    
+    func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
+        controller.dismiss(animated: true)
     }
     
 }

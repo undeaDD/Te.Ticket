@@ -10,6 +10,8 @@
 		1215C3A6234CF8A900F04FAE /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1215C3A5234CF8A900F04FAE /* WebKit.framework */; };
 		1215C3A8234CF8AE00F04FAE /* LocalAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1215C3A7234CF8AE00F04FAE /* LocalAuthentication.framework */; };
 		12388A0E23566EAF00D71C7F /* demo.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 12388A0D23566EAF00D71C7F /* demo.pdf */; };
+		1251A5D023585FF60082F644 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1251A5CF23585FF60082F644 /* Intents.framework */; };
+		1251A5D22358626C0082F644 /* IntentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1251A5D12358626C0082F644 /* IntentsUI.framework */; };
 		1259E341234CC28800C2E829 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1259E340234CC28800C2E829 /* AppDelegate.swift */; };
 		1259E348234CC28800C2E829 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1259E346234CC28800C2E829 /* Main.storyboard */; };
 		1259E34A234CC28D00C2E829 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1259E349234CC28D00C2E829 /* Assets.xcassets */; };
@@ -36,6 +38,9 @@
 		1215C3A5234CF8A900F04FAE /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		1215C3A7234CF8AE00F04FAE /* LocalAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocalAuthentication.framework; path = System/Library/Frameworks/LocalAuthentication.framework; sourceTree = SDKROOT; };
 		12388A0D23566EAF00D71C7F /* demo.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = demo.pdf; sourceTree = "<group>"; };
+		1251A5CE23585F750082F644 /* TE.Ticket.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TE.Ticket.entitlements; sourceTree = "<group>"; };
+		1251A5CF23585FF60082F644 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
+		1251A5D12358626C0082F644 /* IntentsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IntentsUI.framework; path = System/Library/Frameworks/IntentsUI.framework; sourceTree = SDKROOT; };
 		1259E33D234CC28800C2E829 /* TE.Ticket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TE.Ticket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1259E340234CC28800C2E829 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1259E347234CC28800C2E829 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -52,7 +57,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1251A5D023585FF60082F644 /* Intents.framework in Frameworks */,
 				1215C3A8234CF8AE00F04FAE /* LocalAuthentication.framework in Frameworks */,
+				1251A5D22358626C0082F644 /* IntentsUI.framework in Frameworks */,
 				1215C3A6234CF8A900F04FAE /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,6 +70,8 @@
 		1215C3A4234CF8A900F04FAE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1251A5D12358626C0082F644 /* IntentsUI.framework */,
+				1251A5CF23585FF60082F644 /* Intents.framework */,
 				1215C3A7234CF8AE00F04FAE /* LocalAuthentication.framework */,
 				1215C3A5234CF8A900F04FAE /* WebKit.framework */,
 			);
@@ -89,6 +98,7 @@
 		1259E33F234CC28800C2E829 /* TE.Ticket */ = {
 			isa = PBXGroup;
 			children = (
+				1251A5CE23585F750082F644 /* TE.Ticket.entitlements */,
 				12C75028234CCE7600771882 /* Views */,
 				12C75029234CCE7E00771882 /* App */,
 				1259E34E234CC28D00C2E829 /* Info.plist */,
@@ -338,8 +348,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TE.Ticket/TE.Ticket.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 68;
+				CURRENT_PROJECT_VERSION = 72;
 				DEVELOPMENT_TEAM = AXLC3PQNC8;
 				INFOPLIST_FILE = TE.Ticket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -347,7 +358,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.TE-Ticket";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -359,8 +370,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TE.Ticket/TE.Ticket.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 68;
+				CURRENT_PROJECT_VERSION = 72;
 				DEVELOPMENT_TEAM = AXLC3PQNC8;
 				INFOPLIST_FILE = TE.Ticket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -368,7 +380,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.TE-Ticket";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

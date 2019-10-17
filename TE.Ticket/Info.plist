@@ -24,6 +24,10 @@
 	<true/>
 	<key>NSFaceIDUsageDescription</key>
 	<string>App start abgesichert</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>xyz.TE-Ticket.openApp</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
