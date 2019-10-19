@@ -14,7 +14,8 @@ class Utils {
         return path
     }()
     
-    public static func importPDF(_ url: URL) -> Bool {
+    public static func importPDF(_ url: URL?) -> Bool {
+        guard let url = url else { return false }
         do {
             try? FileManager.default.removeItem(at: documentsPath)
             try FileManager.default.copyItem(at: url, to: documentsPath)

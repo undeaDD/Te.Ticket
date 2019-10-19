@@ -6,6 +6,7 @@ import MobileCoreServices
 
 class SettingsView: UIViewController {
 
+    let generator = UIImpactFeedbackGenerator(style: .medium)
     @IBOutlet weak var closeBtn: UIBarButtonItem!
     @IBOutlet weak var heartBtn: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
@@ -21,12 +22,14 @@ class SettingsView: UIViewController {
     }
     
     @IBAction func closeButton(sender: UIBarButtonItem) {
+        generator.impactOccurred()
         self.navigationController?.dismiss(animated: true) {
             (UIApplication.shared.windows[0].rootViewController as? UINavigationController)?.viewControllers[0].viewWillAppear(false)
         }
     }
     
     @IBAction func heartButton(sender: UIBarButtonItem) {
+        generator.impactOccurred()
         Utils.sendHeart(self, sender)
     }
     
@@ -134,6 +137,7 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        generator.impactOccurred()
         switch (indexPath.section, indexPath.row) {
         case (0, 0):
             let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypePDF as String], in: .import)
@@ -149,8 +153,11 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
             let alert = UIAlertController(title: "Wirklich löschen", message: "Möchten Sie das gespeicherte Ticket wirklich löschen", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ja", style: .destructive, handler: { (_) in
                 Utils.removePdf()
+                self.generator.impactOccurred()
             }))
-            alert.addAction(UIAlertAction(title: "Nein", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Nein", style: .cancel, handler: { (_) in
+                self.generator.impactOccurred()
+            }))
             self.present(alert, animated: true)
         case (0, 2):
             let activity = NSUserActivity(activityType: "xyz.TE-Ticket.openApp")
@@ -163,7 +170,6 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
             activity.keywords = Set<String>(arrayLiteral: "Ticket", "Te.Ticket", "Fahrschein", "Semesterticket", "Semester", "Kontrolle")
             activity.persistentIdentifier = NSUserActivityPersistentIdentifier(stringLiteral: "xyz.TE-Ticket.openApp")
             let viewController = INUIAddVoiceShortcutViewController(shortcut: INShortcut(userActivity: activity))
-            //viewController.modalPresentationStyle = .formSheet
             viewController.delegate = self
             present(viewController, animated: true)
         case (0, 3):
@@ -174,7 +180,9 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
                 var error: NSError? = nil
                 if !LAContext().canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) || error != nil {
                     let alert = UIAlertController(title: "Fehler", message: "Biometrische Absicherung fehlgeschlagen: \(error?.localizedDescription ?? "Unbekannter Fehler")", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Okay", style: .destructive, handler: nil))
+                    alert.addAction(UIAlertAction(title: "Okay", style: .destructive, handler: { (_) in
+                        self.generator.impactOccurred()
+                    }))
                     self.present(alert, animated: true)
                     return
                 }
@@ -232,13 +240,20 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
 extension SettingsView: MFMailComposeViewControllerDelegate, UIDocumentPickerDelegate, INUIAddVoiceShortcutViewControllerDelegate {
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        generator.impactOccurred()
         controller.dismiss(animated: true)
     }
 
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        generator.impactOccurred()
+    }
+    
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        generator.impactOccurred()
         if Utils.importPDF(url) {
             let alert = UIAlertController(title: "Erfolgreich", message: "Das Ticket wurde erfolgreich importiert und ist ab jetzt beim App start direkt bereit", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .default) { alert in
+                self.generator.impactOccurred()
                 self.navigationController?.dismiss(animated: true) {
                     (UIApplication.shared.windows[0].rootViewController as? UINavigationController)?.viewControllers[0].viewWillAppear(false)
                 }
@@ -246,17 +261,30 @@ extension SettingsView: MFMailComposeViewControllerDelegate, UIDocumentPickerDel
             self.present(alert, animated: true)
         } else {
             let alert = UIAlertController(title: "Fehler", message: "Das Ticket konnte nicht importiert werden.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .destructive, handler: nil))
+            alert.addAction(UIAlertAction(title: "Okay", style: .destructive, handler: { (_) in
+                self.generator.impactOccurred()
+            }))
             self.present(alert, animated: true)
         }
     }
     
     func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
+        generator.impactOccurred()
         controller.dismiss(animated: true)
     }
     
     func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
+        generator.impactOccurred()
         controller.dismiss(animated: true)
+    }
+    
+}
+
+
+class ♥️ {
+    
+    init() {
+        print("♥️")
     }
     
 }

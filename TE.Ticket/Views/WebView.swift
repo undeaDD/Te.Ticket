@@ -3,6 +3,7 @@ import WebKit
 
 class WebView: UIViewController, UIAdaptivePresentationControllerDelegate, WKNavigationDelegate {
     
+    let generator = UIImpactFeedbackGenerator(style: .medium)
     @IBOutlet weak var refreshBtn: UIBarButtonItem!
     @IBOutlet weak var settingsBtn: UIBarButtonItem!
     @IBOutlet weak var webView: WKWebView!
@@ -18,18 +19,23 @@ class WebView: UIViewController, UIAdaptivePresentationControllerDelegate, WKNav
             DispatchQueue.main.async {
                 if result {
                     self.refresh()
-                    self.refreshControl.addTarget(self, action: #selector(refreshWebView(_:)), for: .valueChanged)
+                    self.refreshControl.addTarget(self, action: #selector(self.refreshWebView(_:)), for: .valueChanged)
                     self.webView.scrollView.addSubview(self.refreshControl)
                     self.webView.scrollView.bounces = true
                 } else {
                     let alert = UIAlertController(title: "App geschützt", message: "Die App konnte nicht entsperrt werden.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Erneut versuchen", style: .default, handler: { (_) in
+                        self.generator.impactOccurred()
                         self.viewDidLoad()
                     }))
                     self.present(alert, animated: true)
                 }
             }
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        generator.impactOccurred()
     }
     
     @objc
@@ -47,6 +53,7 @@ class WebView: UIViewController, UIAdaptivePresentationControllerDelegate, WKNav
     }
     
     @IBAction func refresh() {
+        generator.impactOccurred()
         let url = Utils.loadPDF()
         self.webView.loadFileURL(url, allowingReadAccessTo: url)
     }
