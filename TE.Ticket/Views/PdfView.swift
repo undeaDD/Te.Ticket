@@ -1,17 +1,18 @@
 import UIKit
-import WebKit
+import PDFKit
 
-class WebView: UIViewController, UIAdaptivePresentationControllerDelegate, WKNavigationDelegate {
+class PdfView: UIViewController {
     
     let generator = UIImpactFeedbackGenerator(style: .medium)
     @IBOutlet weak var refreshBtn: UIBarButtonItem!
     @IBOutlet weak var settingsBtn: UIBarButtonItem!
-    @IBOutlet weak var webView: WKWebView!
-    private let refreshControl = UIRefreshControl()
+    @IBOutlet weak var pdfView: PDFView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(scaleChanged), name: .PDFViewScaleChanged, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(scaleChanged), name: .PDFViewDisplayBoxChanged, object: nil)
         refreshBtn.image = UIImage("arrow.2.circlepath.circle.fill")
         settingsBtn.image = UIImage("rectangle.stack.fill")
         
@@ -19,9 +20,6 @@ class WebView: UIViewController, UIAdaptivePresentationControllerDelegate, WKNav
             DispatchQueue.main.async {
                 if result {
                     self.refresh()
-                    self.refreshControl.addTarget(self, action: #selector(self.refreshWebView(_:)), for: .valueChanged)
-                    self.webView.scrollView.addSubview(self.refreshControl)
-                    self.webView.scrollView.bounces = true
                 } else {
                     let alert = UIAlertController(title: "App geschützt", message: "Die App konnte nicht entsperrt werden.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Erneut versuchen", style: .default, handler: { (_) in
@@ -38,12 +36,6 @@ class WebView: UIViewController, UIAdaptivePresentationControllerDelegate, WKNav
         generator.impactOccurred()
     }
     
-    @objc
-    func refreshWebView(_ sender: UIRefreshControl) {
-        refresh()
-        sender.endRefreshing()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if UserDefaults.standard.bool(forKey: "TeShouldUpdate") {
@@ -54,8 +46,23 @@ class WebView: UIViewController, UIAdaptivePresentationControllerDelegate, WKNav
     
     @IBAction func refresh() {
         generator.impactOccurred()
-        let url = Utils.loadPDF()
-        self.webView.loadFileURL(url, allowingReadAccessTo: url)
+        if let document = PDFDocument(url: Utils.loadPDF()) {
+            pdfView.document = document
+        }
+
+        if let dest = Utils.getDestination(), let page = pdfView.document?.page(at: dest.page) {
+            pdfView.scaleFactor = dest.scale
+            pdfView.go(to: dest.rect, on: page)
+        }
+    }
+
+    @objc
+    func scaleChanged() {
+        if let page = pdfView.page(for: pdfView.bounds.center, nearest: true) {
+            let index = pdfView.document?.index(for: page) ?? 0
+            let rect = pdfView.convert(pdfView.bounds, to: page)
+            Utils.saveDestination(PDFSaved(scale: pdfView.scaleFactor, rect: rect, page: index))
+        }
     }
 
 }

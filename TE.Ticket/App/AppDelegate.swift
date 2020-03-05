@@ -7,9 +7,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if #available(iOS 13.0, *) {
-            let override = UserDefaults.standard.bool(forKey: "TeDarkMode")
-            window?.overrideUserInterfaceStyle = override ? .light : .unspecified
+            switch UserDefaults.standard.integer(forKey: "TeDarkModeNew") {
+            case 1:
+                window?.overrideUserInterfaceStyle = .light
+            case 2:
+                window?.overrideUserInterfaceStyle = .dark
+            default:
+                window?.overrideUserInterfaceStyle = .unspecified
+            }
+            
         }
+        
+        UIApplication.shared.isIdleTimerDisabled = true
+        UIScreen.main.wantsSoftwareDimming = false
+        UIScreen.main.brightness = 1.0
         return true
     }
     
@@ -22,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate {
 
     func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
         if let nav = window?.rootViewController as? UINavigationController,
-           let webView = nav.topViewController as? WebView,
-           let presenting = webView.presentingViewController as? UINavigationController {
+           let pdfView = nav.topViewController as? PdfView,
+           let presenting = pdfView.presentingViewController as? UINavigationController {
             presenting.dismiss(animated: true)
         }
         return true
@@ -41,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate {
         if Utils.importPDF(URLContexts.first?.url) {
             let alert = UIAlertController(title: "Erfolgreich", message: "Das Ticket wurde erfolgreich importiert und ist ab jetzt beim App start direkt bereit", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (_) in
-                ((self.window!.rootViewController as? UINavigationController)?.topViewController as? WebView)?.refresh()
+                ((self.window!.rootViewController as? UINavigationController)?.topViewController as? PdfView)?.refresh()
             }))
             window!.rootViewController?.present(alert, animated: true)
         } else {

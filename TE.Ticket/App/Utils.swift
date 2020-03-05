@@ -33,6 +33,21 @@ class Utils {
         return documentsPath
     }
     
+    public static func saveDestination(_ dest: PDFSaved?) {
+        if let dest = dest, let data = try? JSONEncoder().encode(dest) {
+            UserDefaults.standard.set(data, forKey: "saved")
+        }
+    }
+    
+    
+    public static func getDestination() -> PDFSaved? {
+        if let data = UserDefaults.standard.object(forKey: "saved") as? Data {
+            return try? JSONDecoder().decode(PDFSaved.self, from: data)
+        } else {
+            return nil
+        }
+    }
+    
     public static func removePdf() {
         let _ = importPDF(URL(fileURLWithPath: Bundle.main.path(forResource: "demo", ofType: ".pdf")!))
     }
@@ -84,4 +99,14 @@ extension UIImage {
         }
     }
     
+}
+
+extension CGRect {
+    var center: CGPoint { return CGPoint(x: midX, y: midY) }
+}
+
+struct PDFSaved: Codable {
+    let scale: CGFloat
+    let rect: CGRect
+    let page: Int
 }

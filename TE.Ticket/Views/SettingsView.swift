@@ -93,13 +93,12 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = "App Biometrisch sichern"
             return cell
         case (0, 4):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "switchCell") else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "actionCell") else {
                 fatalError("invalid cell dequeued")
             }
 
-            cell.accessoryType = UserDefaults.standard.bool(forKey: "TeDarkMode") ? .checkmark : .none
             cell.imageView?.image = UIImage("circle.lefthalf.fill")
-            cell.textLabel?.text = "DarkMode überschreiben"
+            cell.textLabel?.text = "System style wählen"
             return cell
         
         //------------------
@@ -191,14 +190,27 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
             cell?.accessoryType = newValue ? .checkmark : .none
             UserDefaults.standard.set(newValue, forKey: "TeBioAuth")
         case (0, 4):
-             let newValue = !UserDefaults.standard.bool(forKey: "TeDarkMode")
-             let cell = tableView.cellForRow(at: indexPath)
-             cell?.accessoryType = newValue ? .checkmark : .none
-             UserDefaults.standard.set(newValue, forKey: "TeDarkMode")
-             
-             if #available(iOS 13.0, *) {
-                 UIApplication.shared.windows.first?.overrideUserInterfaceStyle = newValue ? .light : .unspecified
-             }
+            if #available(iOS 13.0, *) {
+                let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+                
+                alert.addAction(UIAlertAction(title: "Dark Mode", style: .default, handler: { (_) in
+                    self.generator.impactOccurred()
+                    UserDefaults.standard.set(2, forKey: "TeDarkModeNew")
+                    UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .dark
+                }))
+                alert.addAction(UIAlertAction(title: "Light Mode", style: .default, handler: { (_) in
+                    self.generator.impactOccurred()
+                    UserDefaults.standard.set(1, forKey: "TeDarkModeNew")
+                    UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .light
+                }))
+                alert.addAction(UIAlertAction(title: "Automatisch", style: .cancel, handler: { (_) in
+                    self.generator.impactOccurred()
+                    UserDefaults.standard.set(0, forKey: "TeDarkModeNew")
+                    UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .unspecified
+                }))
+                
+                self.present(alert, animated: true)
+            }
 
         //------------------
         
@@ -276,15 +288,6 @@ extension SettingsView: MFMailComposeViewControllerDelegate, UIDocumentPickerDel
     func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
         generator.impactOccurred()
         controller.dismiss(animated: true)
-    }
-    
-}
-
-
-class ♥️ {
-    
-    init() {
-        print("♥️")
     }
     
 }

@@ -16,7 +16,7 @@
 		1259E348234CC28800C2E829 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1259E346234CC28800C2E829 /* Main.storyboard */; };
 		1259E34A234CC28D00C2E829 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1259E349234CC28D00C2E829 /* Assets.xcassets */; };
 		1259E34D234CC28D00C2E829 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1259E34B234CC28D00C2E829 /* LaunchScreen.storyboard */; };
-		12C7502B234CCE9400771882 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7502A234CCE9400771882 /* WebView.swift */; };
+		12C7502B234CCE9400771882 /* PdfView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7502A234CCE9400771882 /* PdfView.swift */; };
 		12C7502D234CD08A00771882 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7502C234CD08A00771882 /* SettingsView.swift */; };
 		12C7502F234CEA6000771882 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C7502E234CEA6000771882 /* Utils.swift */; };
 /* End PBXBuildFile section */
@@ -47,7 +47,7 @@
 		1259E349234CC28D00C2E829 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1259E34C234CC28D00C2E829 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1259E34E234CC28D00C2E829 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		12C7502A234CCE9400771882 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		12C7502A234CCE9400771882 /* PdfView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PdfView.swift; sourceTree = "<group>"; };
 		12C7502C234CD08A00771882 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		12C7502E234CEA6000771882 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -110,7 +110,7 @@
 		12C75028234CCE7600771882 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				12C7502A234CCE9400771882 /* WebView.swift */,
+				12C7502A234CCE9400771882 /* PdfView.swift */,
 				12C7502C234CD08A00771882 /* SettingsView.swift */,
 			);
 			path = Views;
@@ -203,7 +203,7 @@
 			files = (
 				12C7502D234CD08A00771882 /* SettingsView.swift in Sources */,
 				1259E341234CC28800C2E829 /* AppDelegate.swift in Sources */,
-				12C7502B234CCE9400771882 /* WebView.swift in Sources */,
+				12C7502B234CCE9400771882 /* PdfView.swift in Sources */,
 				12C7502F234CEA6000771882 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,7 +350,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TE.Ticket/TE.Ticket.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 76;
+				CURRENT_PROJECT_VERSION = 77;
 				DEVELOPMENT_TEAM = AXLC3PQNC8;
 				INFOPLIST_FILE = TE.Ticket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -358,7 +358,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.TE-Ticket";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -372,7 +372,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = TE.Ticket/TE.Ticket.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 76;
+				CURRENT_PROJECT_VERSION = 77;
 				DEVELOPMENT_TEAM = AXLC3PQNC8;
 				INFOPLIST_FILE = TE.Ticket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -380,7 +380,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "xyz.TE-Ticket";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
