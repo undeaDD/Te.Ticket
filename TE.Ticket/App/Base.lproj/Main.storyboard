@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gu7-vy-grl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gu7-vy-grl">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,17 +19,17 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qko-7t-6Kg" customClass="PDFView">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="qko-7t-6Kg" secondAttribute="bottom" id="HC8-w7-1rz"/>
                             <constraint firstItem="qko-7t-6Kg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="IU6-A1-z9g"/>
                             <constraint firstItem="qko-7t-6Kg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="aUj-SX-7JB"/>
                             <constraint firstItem="qko-7t-6Kg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="xVi-3h-Yb0"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Te.Ticket" largeTitleDisplayMode="never" id="EQW-5M-Wv1">
                         <barButtonItem key="leftBarButtonItem" title=" " id="chE-9y-tbZ">
@@ -62,7 +63,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="F1e-An-YzU">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="actionCell" textLabel="KIh-k3-AEP" style="IBUITableViewCellStyleDefault" id="mXC-fM-dhM">
                                         <rect key="frame" x="20" y="55.5" width="374" height="43.5"/>
@@ -109,12 +110,13 @@
                                 <items>
                                     <barButtonItem systemItem="flexibleSpace" id="hcr-TO-fSp"/>
                                     <barButtonItem id="TJH-lK-BF7"/>
-                                    <barButtonItem enabled="NO" title="made by undeaD_D - v1.4.3" id="zs8-pk-x4W"/>
+                                    <barButtonItem enabled="NO" title="made by undeaD_D - v1.5.0" id="zs8-pk-x4W"/>
                                     <barButtonItem systemItem="flexibleSpace" id="Ycf-7c-N6h"/>
                                 </items>
                             </toolbar>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="xk3-qg-SQx"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="QWm-FR-1J7" firstAttribute="leading" secondItem="xk3-qg-SQx" secondAttribute="leading" id="7Ea-c2-eJk"/>
                             <constraint firstAttribute="bottom" secondItem="F1e-An-YzU" secondAttribute="bottom" id="D1k-yp-N6x"/>
@@ -124,7 +126,6 @@
                             <constraint firstItem="F1e-An-YzU" firstAttribute="trailing" secondItem="xk3-qg-SQx" secondAttribute="trailing" id="drl-xz-ZYU"/>
                             <constraint firstItem="F1e-An-YzU" firstAttribute="top" secondItem="5Aq-3M-cpw" secondAttribute="top" id="oqB-VD-0vh"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="xk3-qg-SQx"/>
                     </view>
                     <navigationItem key="navigationItem" title="App Menü" id="PfR-Yi-Znk">
                         <barButtonItem key="leftBarButtonItem" title=" " id="jeY-gU-uP5">
@@ -133,7 +134,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title=" " id="hpH-ml-fsl">
-                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="tintColor" systemColor="systemRedColor"/>
                             <connections>
                                 <action selector="heartButtonWithSender:" destination="UhF-Ew-uBw" id="4m2-Qk-N2n"/>
                             </connections>
@@ -182,5 +183,25 @@
             <point key="canvasLocation" x="-301" y="125"/>
         </scene>
     </scenes>
-    <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+    <color key="tintColor" systemColor="systemOrangeColor"/>
+    <resources>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

@@ -3,12 +3,14 @@ import LocalAuthentication
 
 class Utils {
 
+    public static let userDefaults = UserDefaults(suiteName: "group.Te-Ticket")!
+    public static let fileManager = FileManager.default
     static let tg: String = {
         return String(data: Data(base64Encoded: "aHR0cHM6Ly9hcGkudGVsZWdyYW0ub3JnL2JvdDgwOTc1OTE3NTpBQUdnQUZxMGhGV2ZHSjhNUlBxSDhYWEt0NVIyWFJfNl9OTS9zZW5kTWVzc2FnZT9jaGF0X2lkPTIwOTMyNzQ3JnRleHQ9")!, encoding: .utf8)!
     }()
     
-    static let documentsPath: URL = {
-        var path = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+    static let ticketDirectory: URL = {
+        var path = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.Te-Ticket")!
         path.appendPathComponent("ticket")
         path.appendPathExtension("pdf")
         return path
@@ -17,9 +19,9 @@ class Utils {
     public static func importPDF(_ url: URL?) -> Bool {
         guard let url = url else { return false }
         do {
-            try? FileManager.default.removeItem(at: documentsPath)
-            try FileManager.default.copyItem(at: url, to: documentsPath)
-            UserDefaults.standard.set(true, forKey: "TeShouldUpdate")
+            try? FileManager.default.removeItem(at: ticketDirectory)
+            try FileManager.default.copyItem(at: url, to: ticketDirectory)
+            userDefaults.set(true, forKey: "TeShouldUpdate")
             return true
         } catch {
             return false
@@ -27,21 +29,21 @@ class Utils {
     }
     
     public static func loadPDF() -> URL {
-        if !FileManager.default.fileExists(atPath: documentsPath.path) {
+        if !FileManager.default.fileExists(atPath: ticketDirectory.path) {
             let _ = importPDF(URL(fileURLWithPath: Bundle.main.path(forResource: "demo", ofType: ".pdf")!))
         }
-        return documentsPath
+        return ticketDirectory
     }
     
     public static func saveDestination(_ dest: PDFSaved?) {
         if let dest = dest, let data = try? JSONEncoder().encode(dest) {
-            UserDefaults.standard.set(data, forKey: "saved")
+            userDefaults.set(data, forKey: "saved")
         }
     }
     
     
     public static func getDestination() -> PDFSaved? {
-        if let data = UserDefaults.standard.object(forKey: "saved") as? Data {
+        if let data = userDefaults.object(forKey: "saved") as? Data {
             return try? JSONDecoder().decode(PDFSaved.self, from: data)
         } else {
             return nil
@@ -53,7 +55,7 @@ class Utils {
     }
     
     public static func sendHeart(_ vc: UIViewController, _ sender: UIBarButtonItem) {
-        if UserDefaults.standard.bool(forKey: "TeHeart") {
+        if userDefaults.bool(forKey: "TeHeart") {
             let alert = UIAlertController(title: "Schon Gedankt", message: "Du hast mir schon einen Dank zukommen lassen. Alternativ kannst du mir einen Kaffe spendieren.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Gerne", style: .default) { (_) in
                 UIApplication.shared.open(URL(string: "https://undeadd.github.io/Te.Ticket/tip.html")!, options: [:])
@@ -62,7 +64,7 @@ class Utils {
             vc.present(alert, animated: true)
         } else {
             sender.isEnabled = false
-            UserDefaults.standard.set(true, forKey: "TeHeart")
+            userDefaults.set(true, forKey: "TeHeart")
 
             if let url = (tg + "❤️ -> Te.Ticket\nby \(UIDevice.current.name) (iOS\(UIDevice.current.systemVersion))").addingPercentEncoding(withAllowedCharacters:.urlQueryAllowed) {
                 let request = URLRequest(url: URL(string: url)!)
@@ -72,7 +74,7 @@ class Utils {
     }
     
     public static func shouldLoad(_ callback: @escaping (Bool) -> Void) {
-        if UserDefaults.standard.bool(forKey: "TeBioAuth") {
+        if userDefaults.bool(forKey: "TeBioAuth") {
             LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "App start abgesichert") { (result, error) in
                 DispatchQueue.main.async {
                     if error != nil || !result {
@@ -90,7 +92,6 @@ class Utils {
 }
 
 extension UIImage {
-    
     public convenience init?(_ compatible: String) {
         if #available(iOS 13.0, *) {
             self.init(systemName: compatible)
@@ -98,7 +99,6 @@ extension UIImage {
             self.init(named: compatible)
         }
     }
-    
 }
 
 extension CGRect {

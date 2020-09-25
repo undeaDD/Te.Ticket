@@ -1,16 +1,25 @@
 import UIKit
+import WidgetKit
 import IntentsUI
 import MessageUI
 import LocalAuthentication
 import MobileCoreServices
 
 class SettingsView: UIViewController {
-
-    let generator = UIImpactFeedbackGenerator(style: .medium)
+   
     @IBOutlet weak var closeBtn: UIBarButtonItem!
     @IBOutlet weak var heartBtn: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
-    
+
+    let generator = UIImpactFeedbackGenerator(style: .medium)
+    let pickerController: UIImagePickerController = {
+        let pickerController = UIImagePickerController()
+        pickerController.allowsEditing = true
+        pickerController.mediaTypes = ["public.image"]
+        pickerController.sourceType = .photoLibrary
+        return pickerController
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,6 +28,7 @@ class SettingsView: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        pickerController.delegate = self
     }
     
     @IBAction func closeButton(sender: UIBarButtonItem) {
@@ -43,7 +53,9 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var temp = 4
-        if #available(iOS 13.0, *) {
+        if #available(iOS 14.0, *) {
+            temp = 6
+        } else if #available(iOS 13.0, *) {
             temp = 5
         }
         
@@ -88,7 +100,7 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
                 fatalError("invalid cell dequeued")
             }
 
-            cell.accessoryType = UserDefaults.standard.bool(forKey: "TeBioAuth") ? .checkmark : .none
+            cell.accessoryType = Utils.userDefaults.bool(forKey: "TeBioAuth") ? .checkmark : .none
             cell.imageView?.image = UIImage("faceid")
             cell.textLabel?.text = "App Biometrisch sichern"
             return cell
@@ -99,6 +111,14 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
 
             cell.imageView?.image = UIImage("circle.lefthalf.fill")
             cell.textLabel?.text = "System style wählen"
+            return cell
+        case (0, 5):
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "actionCell") else {
+                fatalError("invalid cell dequeued")
+            }
+
+            cell.imageView?.image = UIImage("qrcode")
+            cell.textLabel?.text = "Widgets aktualisieren"
             return cell
         
         //------------------
@@ -172,7 +192,7 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
             viewController.delegate = self
             present(viewController, animated: true)
         case (0, 3):
-            let newValue = !UserDefaults.standard.bool(forKey: "TeBioAuth")
+            let newValue = !Utils.userDefaults.bool(forKey: "TeBioAuth")
             let cell = tableView.cellForRow(at: indexPath)
             
             if newValue {
@@ -188,30 +208,32 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
             }
             
             cell?.accessoryType = newValue ? .checkmark : .none
-            UserDefaults.standard.set(newValue, forKey: "TeBioAuth")
+            Utils.userDefaults.set(newValue, forKey: "TeBioAuth")
         case (0, 4):
             if #available(iOS 13.0, *) {
                 let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
                 
                 alert.addAction(UIAlertAction(title: "Dark Mode", style: .default, handler: { (_) in
                     self.generator.impactOccurred()
-                    UserDefaults.standard.set(2, forKey: "TeDarkModeNew")
+                    Utils.userDefaults.set(2, forKey: "TeDarkModeNew")
                     UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .dark
                 }))
                 alert.addAction(UIAlertAction(title: "Light Mode", style: .default, handler: { (_) in
                     self.generator.impactOccurred()
-                    UserDefaults.standard.set(1, forKey: "TeDarkModeNew")
+                    Utils.userDefaults.set(1, forKey: "TeDarkModeNew")
                     UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .light
                 }))
                 alert.addAction(UIAlertAction(title: "Automatisch", style: .cancel, handler: { (_) in
                     self.generator.impactOccurred()
-                    UserDefaults.standard.set(0, forKey: "TeDarkModeNew")
+                    Utils.userDefaults.set(0, forKey: "TeDarkModeNew")
                     UIApplication.shared.windows.first?.overrideUserInterfaceStyle = .unspecified
                 }))
                 
                 self.present(alert, animated: true)
             }
-
+        case (0, 5):
+            present(pickerController, animated: true)
+        
         //------------------
         
         case (1, 0):
@@ -249,7 +271,7 @@ extension SettingsView: UITableViewDelegate, UITableViewDataSource {
 
 }
 
-extension SettingsView: MFMailComposeViewControllerDelegate, UIDocumentPickerDelegate, INUIAddVoiceShortcutViewControllerDelegate {
+extension SettingsView: MFMailComposeViewControllerDelegate, UIDocumentPickerDelegate, INUIAddVoiceShortcutViewControllerDelegate, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         generator.impactOccurred()
@@ -290,4 +312,22 @@ extension SettingsView: MFMailComposeViewControllerDelegate, UIDocumentPickerDel
         controller.dismiss(animated: true)
     }
     
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        Utils.userDefaults.removeObject(forKey: "widgetImage")
+        Utils.userDefaults.synchronize()
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+        picker.dismiss(animated: true)
+    }
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = (info[.editedImage] != nil) ? info[.editedImage] as! UIImage : info[.originalImage] as! UIImage
+        Utils.userDefaults.set(image.jpegData(compressionQuality: 0.9), forKey: "widgetImage")
+        Utils.userDefaults.synchronize()
+        if #available(iOS 14.0, *) {
+            WidgetCenter.shared.reloadAllTimelines()
+        }
+        picker.dismiss(animated: true)
+    }
 }

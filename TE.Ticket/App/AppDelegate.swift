@@ -7,7 +7,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if #available(iOS 13.0, *) {
-            switch UserDefaults.standard.integer(forKey: "TeDarkModeNew") {
+            switch Utils.userDefaults.integer(forKey: "TeDarkModeNew") {
             case 1:
                 window?.overrideUserInterfaceStyle = .light
             case 2:
@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UIWindowSceneDelegate {
         UIScreen.main.brightness = 1.0
         return true
     }
-    
+
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         let alert = UIAlertController(title: "Fehler", message: "Das Ticket konnte nicht importiert werden. Versuche es mal über \"Ticket importieren\" in den Einstellungen.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))

@@ -38,8 +38,8 @@ class PdfView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if UserDefaults.standard.bool(forKey: "TeShouldUpdate") {
-            UserDefaults.standard.set(false, forKey: "TeShouldUpdate")
+        if Utils.userDefaults.bool(forKey: "TeShouldUpdate") {
+            Utils.userDefaults.set(false, forKey: "TeShouldUpdate")
             refresh()
         }
     }
