@@ -3,13 +3,26 @@ import SwiftUI
 import UIKit
 
 let userDefault = UserDefaults.init(suiteName: "group.Te-Ticket")!
-let entry = WidgetEntry(date: Date())
 
-struct WidgetEntry: TimelineEntry { let date: Date }
+struct WidgetEntry: TimelineEntry {
+    let date: Date
+    let image: UIImage?
+
+    public init(date: Date, _ image: UIImage? = nil) {
+        self.date = date
+        self.image = image
+    }
+}
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> WidgetEntry { entry }
-    func getSnapshot(in context: Context, completion: @escaping (WidgetEntry) -> ()) { completion(entry) }
+    func placeholder(in context: Context) -> WidgetEntry {
+        WidgetEntry(date: Date(), UIImage(named: "placeholder"))
+    }
+
+    func getSnapshot(in context: Context, completion: @escaping (WidgetEntry) -> ()) {
+        completion(WidgetEntry(date: Date()))
+    }
+
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         let date = Calendar.current.date(byAdding: .second, value: 10, to: Date())!
         completion(Timeline(entries: [WidgetEntry(date: date)], policy: .atEnd))
@@ -28,7 +41,7 @@ struct WidgetEntryView : View {
     }()
     
     var body: some View {
-        Image(uiImage: image)
+        Image(uiImage: entry.image != nil ? entry.image! : self.image)
         .resizable()
         .aspectRatio(contentMode: .fill)
     }
@@ -50,7 +63,7 @@ struct MyWidget: Widget {
 
 struct Widget_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetEntryView(entry: entry)
+        WidgetEntryView(entry: WidgetEntry(date: Date(), UIImage(named: "placeholder")))
         .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }
